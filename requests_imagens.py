@@ -1,4 +1,3 @@
-# requests_imagens.py
 import requests
 
 def classify_image(image_path):

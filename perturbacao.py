@@ -4,12 +4,10 @@ from PIL import Image
 from imagens_base import path_reprovado
 from requests_imagens import classify_image
 
-# Create output directory
 output_dir = "imagens_perturbadas"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-# Load original image
 original_image = Image.open(path_reprovado)
 
 def perturb_image(image, epsilon=0.1, noise_type='uniform'):
@@ -32,13 +30,11 @@ def perturb_image(image, epsilon=0.1, noise_type='uniform'):
     
     return Image.fromarray((perturbed_img_array * 255).astype(np.uint8))
 
-# Rest of your code remains the same
 
-# Aumentar número de tentativas e epsilon
 noise_types = ['uniform', 'gaussian', 'salt_pepper']
 for noise_type in noise_types:
-    for i in range(20):  # Mais iterações
-        epsilon = 0.1 * (i + 1)  # Epsilon maior
+    for i in range(20):  
+        epsilon = 0.1 * (i + 1)  
         perturbed_image = perturb_image(original_image, epsilon=epsilon, noise_type=noise_type)
         
         temp_path = os.path.join(output_dir, f"perturbed_{noise_type}_{i}.jpg")
